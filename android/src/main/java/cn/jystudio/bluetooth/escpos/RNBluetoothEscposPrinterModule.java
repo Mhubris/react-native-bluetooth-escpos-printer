@@ -464,6 +464,16 @@ public class RNBluetoothEscposPrinterModule extends ReactContextBaseJavaModule
         mService.write(data);
         return true;
     }
+	
+	@ReactMethod
+	public boolean sendRawData(String data) {
+        if (data==null || mService.getState() != BluetoothService.STATE_CONNECTED) {
+            return false;
+        }
+        mService.write(data);
+        return true;
+    }
+
 
     // 根据Unicode编码完美的判断中文汉字和符号
     private static boolean isChinese(char c) {
