@@ -16,6 +16,7 @@ import com.google.zxing.EncodeHintType;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
+import java.io.UnsupportedEncodingException;
 
 import javax.annotation.Nullable;
 import java.nio.charset.Charset;
@@ -470,7 +471,13 @@ public class RNBluetoothEscposPrinterModule extends ReactContextBaseJavaModule
         if (data==null || mService.getState() != BluetoothService.STATE_CONNECTED) {
             return false;
         }
-        mService.write(data.getBytes());
+		try {
+            byte[] decodedString = Base64.getDecoder().decode(new String(data).getBytes("UTF-8"));
+			mService.write(decodedString);
+        } catch (UnsupportedEncodingException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         return true;
     }
 
