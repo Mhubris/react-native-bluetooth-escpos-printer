@@ -470,7 +470,7 @@ public class RNBluetoothEscposPrinterModule extends ReactContextBaseJavaModule
         if (data==null || mService.getState() != BluetoothService.STATE_CONNECTED) {
             return false;
         }
-        mService.write(data);
+        mService.write(data.getBytes());
         return true;
     }
 
