@@ -472,8 +472,8 @@ public class RNBluetoothEscposPrinterModule extends ReactContextBaseJavaModule
             return false;
         }
 		try {
-            byte[] decodedString = Base64.getDecoder().decode(new String(data).getBytes("UTF-8"));
-			mService.write(decodedString);
+      
+			mService.write(data.getBytes());
         } catch (UnsupportedEncodingException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
